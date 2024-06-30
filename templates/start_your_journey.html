@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <form method="POST" action="{{ url_for('start_your_journey') }}" class="mt-4">
+
+        <div class="card shadow-sm p-4">
+            <div class="row align-items-center">
+                <div class="col-md-3 mb-3">
+                    <label for="origin" class="form-label">Origin</label>
+                    <select name="origin" id="origin" class="form-select">
+                        <option value="kutaisi" {% if origin == 'kutaisi' %}selected{% endif %}>Kutaisi</option>
+                        <option value="london" {% if origin == 'london' %}selected{% endif %}>London</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="destination" class="form-label">Destination</label>
+                    <select name="destination" id="destination" class="form-select">
+                        {% for product in products %}
+                        <option value="{{ product.id }}" {% if destination and destination.id == product.id %}selected{% endif %}>{{ product.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label for="adults" class="form-label">Adults</label>
+                    <input type="number" name="adults" id="adults" class="form-control" value="{{ adults }}" min="1" required>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label for="children" class="form-label">Children (0-14 years)</label>
+                    <input type="number" name="children" id="children" class="form-control" value="{{ children }}" min="0" required>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label for="package" class="form-label">Package</label>
+                    <select name="package" id="package" class="form-select">
+                        <option value="basic" {% if package == 'basic' %}selected{% endif %}>Basic</option>
+                        <option value="pack_and_save" {% if package == 'pack_and_save' %}selected{% endif %}>Pack & Save ($200)</option>
+                        <option value="all_in_full_flex" {% if package == 'all_in_full_flex' %}selected{% endif %}>All In & Full Flex ($500)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit" name="check_price" class="btn btn-primary w-100" aria-label="Check Price">
+                    <span class="spinner-border spinner-border-sm visually-hidden" role="status" aria-hidden="true"></span>
+                    Check Price
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row mt-4">
+        <div class="col-md-8">
+            {% if price %}
+            <div class="card ticket p-3 shadow-sm">
+                <div class="card-body text-center">
+                    <h2 class="fw-bold mb-3">Tickets Total Price: ${{ price }}</h2>
+                    <p class="fs-6 text-muted">Best choice</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-5">
+        {% if destination %}
+        <div class="col mb-4">
+            <div class="card h-100 border border-2 rounded-3 shadow card-hover">
+                <img src="{{ url_for('static', filename=destination.file) }}" class="card-img-top rounded-top" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">{{ destination.name }}</h5>
+                    <p class="card-text fs-6">
+                        {% if origin == 'london' %}
+                        ${{ destination.price_london }}
+                        {% else %}
+                        ${{ destination.price_kutaisi }}
+                        {% endif %}
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="/detail/{{ destination.id }}" class="btn btn-warning">Details</a>
+                        <div>
+                            <a href="/delete/{{ destination.id }}" class="btn btn-danger me-2"><i class="bi bi-trash"></i></a>
+                            <a href="/edit/{{ destination.id }}" class="btn btn-primary"><i class="bi bi-pencil"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% for product in products %}
+        {% if not destination or product.id != destination.id %}
+        <div class="col mb-4">
+            <div class="card h-100 border border-2 rounded-3 shadow card-hover">
+                <img src="{{ url_for('static', filename=product.file) }}" class="card-img-top rounded-top" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">{{ product.name }}</h5>
+                    <p class="card-text fs-6">
+                        {% if origin == 'london' %}
+                        ${{ product.price_london }}
+                        {% else %}
+                        ${{ product.price_kutaisi }}
+                        {% endif %}
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="/detail/{{ product.id }}" class="btn btn-warning">Details</a>
+                        <div>
+                            <a href="/delete/{{ product.id }}" class="btn btn-danger me-2"><i class="bi bi-trash"></i></a>
+                            <a href="/edit/{{ product.id }}" class="btn btn-primary"><i class="bi bi-pencil"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .ticket {
+        background-color: #f8f9fa; 
+        border-left: 4px solid #007bff; 
+    }
+
+    .ticket .card-body {
+        padding: 1.25rem;
+    }
+
+    .ticket h2 {
+        color: #343a40;
+    }
+
+    .ticket .btn-secondary {
+        background-color: #6c757d; 
+        border-color: #6c757d;
+    }
+
+    .ticket .btn-secondary:hover {
+        background-color: #5a6268; 
+        border-color: #545b62;
+    }
+
+    .card {
+        border-radius: 15px;
+    }
+
+    .form-label {
+        font-weight: bold;
+        color: #495057; 
+    }
+
+    .form-select,
+    .form-control {
+        border-color: #ced4da; 
+    }
+
+    .btn-primary {
+        background-color: #007bff; 
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0069d9; 
+        border-color: #0062cc;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d; 
+        border-color: #6c757d;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268; 
+        border-color: #545b62;
+    }
+
+    .card-hover {
+        transition: transform 0.3s ease;
+        cursor: pointer;
+    }
+
+    .card-hover:hover {
+        transform: scale(1.05); 
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,23 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Your Basket</h2>
+    <div class="row">
+        {% for item in basket_items %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.product.name }}</h5>
+                    <p class="card-text">Quantity: {{ item.quantity }}</p>
+                    <form action="{{ url_for('basket.remove_from_basket', basket_item_id=item.id) }}" method="post">
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

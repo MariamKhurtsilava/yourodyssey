@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    <h1 >
+        {% for user, value in users.items() %}
+            <div style="display: flex;">
+                <ul>
+                    <li>
+                        <p>Username {{ user }}</p>
+                        <p>User id {{value}}</p>
+                    </li>
+                </ul>
+            </div>  
+        
+        {% endfor %}
+        
+    </h1>
+    <p>developer</p>
+</body>
+</html>

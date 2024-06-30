@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block styles %}
+<style>
+  body {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('https://sb.ecobnb.net/app/uploads/sites/3/2022/04/copertina-1.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+  }
+  .container {
+    margin-top: 50px;
+  }
+  .card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+  }
+  .card-title {
+    color: #007bff;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  .btn-primary {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    color: #fff;
+    transition: background-color 0.3s ease;
+  }
+  .btn-primary:hover {
+    background-color: #00408a;
+    border-color: #00408a;
+  }
+  
+  @media (max-width: 768px) {
+    .card {
+      padding: 15px;
+      margin: 15px;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow">
+        <div class="card-body">
+          <h2 class="card-title mb-4">Profile</h2>
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" id="username" class="form-control" value="{{ user.username }}" disabled>
+          </div>
+          
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" class="form-control" value="********" disabled>
+          </div>
+          <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#updatePasswordModal">Update Password</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="updatePasswordModal" tabindex="-1" aria-labelledby="updatePasswordModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updatePasswordModalLabel">Update Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form id="updatePasswordForm" method="POST" action="{{ url_for('profile') }}">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+              <label for="currentPassword" class="form-label">Current Password</label>
+              {{ form.current_password(class="form-control", id="currentPassword") }}
+            </div>
+            <div class="mb-3">
+              <label for="newPassword" class="form-label">New Password</label>
+              {{ form.new_password(class="form-control", id="newPassword") }}
+            </div>
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label">Confirm New Password</label>
+              {{ form.confirm_password(class="form-control", id="confirmPassword") }}
+            </div>
+            <div id="passwordFeedback" class="mb-3"></div>
+            <button type="submit" class="btn btn-primary">Update Password</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

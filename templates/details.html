@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+{% set img = product.file %}
+<div class="container">
+    <div class="row row-cols-lg-4 row-cols-md-2 row-cols-s-1 mt-500">
+        <div class="col" style="display: flex; justify-content: space-evenly;">
+            <div class="card" style="width: 18rem;">
+                <img src= "{{ url_for('static', filename=img) }}" class="card-img-top" alt="X" >
+                <div class="card-body">
+                  <h5 class="card-title">{{ product.name }}</h5>
+                  <p class="card-text">{{ product.price }}</p>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

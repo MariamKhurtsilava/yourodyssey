@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    body {
+        position: relative;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: #FFFFFF;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://good-nature-blog-uploads.s3.amazonaws.com/uploads/2023/01/75047305-3EFB-4A81-8665-42A5C96B968F.jpeg');
+        background-size: cover;
+        z-index: -1;
+    }
+
+    .register-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100vh; 
+        width: 100%;
+        padding-top: 60px; 
+    }
+    
+    .register-card {
+        background: rgba(255, 255, 255, 0.696);
+        padding: 2rem;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+        margin-left: 2rem;
+        position: relative;
+        z-index: 0;
+    }
+
+    .register-card h2 {
+        margin-bottom: 1rem;
+        color: #090fc2; 
+    }
+
+    .form-register {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .form-content {
+        width: 100%;
+        padding: 0.75rem;
+        border: 3px solid rgba(68, 247, 199, 0.5); 
+        border-radius: 4px;
+        box-sizing: border-box;
+        background: rgba(255, 253, 253, 0.2); 
+        color: #090fc2; 
+    }
+
+    .form-content:focus {
+        border-color: #dda1f0;
+        outline: none;
+    }
+
+    .form-label {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        text-align: left;
+        display: block;
+        color: #0000ff; 
+    }
+
+    .form-button {
+        padding: 0.75rem;
+        border: none;
+        border-radius: 4px;
+        background-color: #0e9ab6;
+        color: white;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    .form-button:hover {
+        background-color: #0b15d1;
+    }
+</style>
+
+<div class="register-container">
+    <div class="register-card">
+        <h2>Create an account</h2>
+        <form method="POST" enctype="multipart/form-data" class="form-register">
+            {{ form.hidden_tag() }}
+
+            <label class="form-label" for="username">Username</label>
+            {{ form.username(class="form-content", placeholder="") }}
+
+            <label class="form-label" for="password">Password</label>
+            {{ form.password(class="form-content", placeholder="") }}
+
+            {{ form.register(class="form-button") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

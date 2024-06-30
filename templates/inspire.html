@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playwrite New Zealand</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+        }
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+        }
+        .blockquote {
+            font-family: 'Roboto', sans-serif;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="text-center mb-4">
+            <h1>Inspire Your Next Adventure</h1>
+        </div>
+        
+        <!-- Inspirational Quotes Carousel -->
+        <div id="quotesCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <blockquote class="blockquote text-center">
+                        <p class="mb-4">"The world is a book, and those who do not travel read only one page."</p>
+                        <footer class="blockquote-footer">Saint Augustine</footer>
+                    </blockquote>
+                </div>
+                <div class="carousel-item">
+                    <blockquote class="blockquote text-center">
+                        <p class="mb-4">"Travel is the only thing you buy that makes you richer."</p>
+                        <footer class="blockquote-footer">Anonymous</footer>
+                    </blockquote>
+                </div>
+                <div class="carousel-item">
+                    <blockquote class="blockquote text-center">
+                        <p class="mb-4">"Not all those who wander are lost."</p>
+                        <footer class="blockquote-footer">J.R.R. Tolkien</footer>
+                    </blockquote>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#quotesCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#quotesCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        
+     
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://wizzair.com/dist-ssr/assets/images/bundle-basic_500.a07ae89a.jpg" class="card-img-top" alt="Basic">
+                    <div class="card-body">
+                        <h5 class="card-title">Basic</h5>
+                        <p class="card-text">Basic fare is for those who like to cherry pick the services they deem important. It includes a free carry-on bag (max. size 40 x 30 x 20cm) and online check-in, available based on seat selection. Carry-on bag</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://wizzair.com/dist-ssr/assets/images/bundle-middle_500.06398cda.jpg" class="card-img-top" alt="Pack & Save">
+                    <div class="card-body">
+                        <h5 class="card-title">Pack & Save</h5>
+                        <p class="card-text">Pack & Save is a bundle of our most popular services which has already proven itself to be a great fit for many of our customers. Pack & Save includes: seat selection (excluding extra legroom seats), a 20 kg checked-in bag (149 x 119 x 171 cm), plus one (+1) carry-on bag (40x30x20 cm), which must be placed under the seat, and online check-in up to 30 days before flight departure. 20 kg checked-in bag. Seat selection (1st to 4th row and extra legroom seats are excluded). Free airport & online check-in up to 30 days before flight departure. +1 Carry-on bag 40 x 30 x 20 cm (placed under the seat)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://1000traveltips.com/wp-content/uploads/2015/09/Dollarphotoclub_58219110.jpg" class="card-img-top" alt="All in & Full flex">
+                    <div class="card-body">
+                        <h5 class="card-title">All in & Full flex</h5>
+                        <p class="card-text">All in & Full flex is for those who like to be prepared for everything and like to enjoy the comfort of our full service. It includes a large amount of extra services at a discount price. It provides great flexibility and offers the most comfortable passenger experience. All in & Full flex includes premium seat selection with the extra legroom seats, along with feature which allows you to change your flight date if needed, without any extra charge. You can also enjoy our Flex Priority service, which lets you take an extra trolley bag (of max. size 55 x 40 x 23cm, 10 kg), along with a free carry-on bag (max. 40 x 30 x 20 cm). It is guaranteed you can bring both bags with you into the cabin area (unless it is impossible due to operational restrictions), and you will be called first for boarding. In addition, you can bring a 32 kg checked-in bag (max. size 149 x 119 x 171 cm). You will also receive flight Information updates and have the option of choosing online check-in 30 days before your flight departure or Airport check-in.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
